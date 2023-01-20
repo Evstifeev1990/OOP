@@ -59,7 +59,8 @@ public class View {
     }
 
     public void comandAdd() {
-        
+        ArrayList<String> name = familyTree.getName();
+        System.out.println(name);
     }
 
     public void comandHumanName() {
