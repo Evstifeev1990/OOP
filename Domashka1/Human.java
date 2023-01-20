@@ -61,10 +61,13 @@ public class Human {
         this.sex = sex;
         this.age = age;
         this.father = father;
-        getFather().getChildren().add(this);
+        setAddChildren(father, this);
         this.mother = mother;
-        getMother().getChildren().add(this);
+        setAddChildren(mother, this);
         this.children = children;
+    }
+
+    public Human(Human name2, Human name3, int age2, Object father2, Object mother2, Object children2) {
     }
 
     @Override
@@ -72,8 +75,53 @@ public class Human {
         return "Имя: " + name + "\n" +
         "Пол: " + sex + "\n" +
         "Возраст: " + age + "\n" +
-        "Отец: " + father + "\n" +
-        "Мама: " + mother + "\n" +
-        "Дети: " + children + "\n" + "\n";
+        "Отец: " + getNameFatherMather(father) + "\n" +
+        "Мама: " + getNameFatherMather(mother) + "\n" +
+        "Дети: " + getNameChildren(children) + "\n";
     }
+
+    public String getNameFatherMather(Human fatherMather) {
+        String res;
+        if (fatherMather != null) {
+            res = fatherMather.getName();
+        }
+        else {
+            res = "Имя отсутствует";
+        }
+        return res;
+    }
+    public ArrayList<String> getNameChildren(ArrayList<Human> children) {
+        ArrayList<String> res = new ArrayList<>();       
+        if (children != null) {           
+            for (Human human:children) {
+                res.add(human.getName());  
+            }
+        }
+        else {
+            res.add("Дети отсутствуют");
+        }
+        return res;
+    }
+
+    public void setAddChildren(Human fatherMather, Human name) {
+        ArrayList<Human> child = new ArrayList<>();
+        if (fatherMather != null) {
+            
+            if (fatherMather.getChildren() != null) {
+                fatherMather.getChildren().add(name);
+            }
+            else {
+                child.add(name);
+                fatherMather.setChildren(child);
+                // children = child;
+                // System.out.println(getNameChildren(children));
+            }
+
+        }
+        else {
+            
+        }
+        
+    }
+    
 }
